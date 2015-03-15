@@ -28,7 +28,8 @@ function afficher(podcast) {
 	var contenu = document.getElementById("Channelcontent");
 	var tabChannel = podcast.getElementsByTagName("channel"); //Tableau des channel même si il n'y en à qu'une en général
 	console.log("Nombre de channel: " + tabChannel.length);
-	for (var i, chaine; chaine=tabChannel[i];i++) {   //Pour chaque chaine
+	//for (var i, chaine; chaine=tabChannel[i];i++) {   //Pour chaque chaine
+   	for (var j=0; j<tabChannel.length; j++){
    		console.log("chaine");
    		var titreNode = contenu.children[0];
    		var linkNode = contenu.children[1];
@@ -46,13 +47,26 @@ function afficher(podcast) {
 			console.log("Il y a une image");
 			var image = podcast.getElementsByTagName("image")[0];
 			imageNode.src = image.getElementsByTagName("url")[0].textContent;
+			imageNode.title = image.getElementsByTagName("title")[0].textContent;
+			imageNode.link = image.getElementsByTagName("link")[0].textContent;
 		}
 
-		for (var item in podcast.getElementsByTagName("item")){  //Pour chaque item
-			console.log("Nombre d'item: " + podcast.getElementsByTagName("item").length);
+
+
+		console.log("Nombre d'item: " + podcast.getElementsByTagName("item").length);
+		var tabItem = podcast.getElementsByTagName("item");
+		var listeItem = document.getElementById("listeItem");
+		for (var i=0; i<tabItem.length; i++){  //Pour chaque item
 			//Nouvel item
 			var newItem = itemNodeVide.cloneNode(true);
+			newItem.style.display="inline";
+			listeItem.appendChild(newItem);
 			//Recuperer title, link, description et enclosure et les insérer dans newItem
+			newItem.children[0].textContent=tabItem[i].getElementsByTagName("title")[0].textContent;
+			newItem.children[1].textContent=tabItem[i].getElementsByTagName("link")[0].textContent;
+			newItem.children[2].textContent=tabItem[i].getElementsByTagName("description")[0].textContent;
+			
+
 		}
 	}
 }
