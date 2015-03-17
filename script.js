@@ -43,12 +43,11 @@ function afficher(podcast) {
    		descriptionNode.textContent = podcast.getElementsByTagName("description")[0].textContent;
 		
 		//Test si il existe une image
-		if (podcast.getElementsByTagName("image")[0] !== null){
-			console.log("Il y a une image");
+		if (podcast.getElementsByTagName("image")[0] !== undefined){
 			var image = podcast.getElementsByTagName("image")[0];
 			imageNode.src = image.getElementsByTagName("url")[0].textContent;
-			imageNode.title = image.getElementsByTagName("title")[0].textContent;
-			imageNode.link = image.getElementsByTagName("link")[0].textContent;
+			imageNode.alt = image.getElementsByTagName("title")[0].textContent;
+			//imageNode.link = image.getElementsByTagName("link")[0].textContent;
 		}
 
 
@@ -64,7 +63,35 @@ function afficher(podcast) {
 			//Recuperer title, link, description et enclosure et les insérer dans newItem
 			newItem.children[0].textContent=tabItem[i].getElementsByTagName("title")[0].textContent;
 			newItem.children[1].textContent=tabItem[i].getElementsByTagName("link")[0].textContent;
-			newItem.children[2].textContent=tabItem[i].getElementsByTagName("description")[0].textContent;
+			newItem.children[2].innerHTML=tabItem[i].getElementsByTagName("description")[0].textContent;
+			
+			if (tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("type") !== null){
+				var type = tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("type");
+				//Test si audio ou video
+				if ((type.split("/")[0])==="audio"){
+					console.log("audio");
+					newItem.children[3].children[0].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+					newItem.children[3].children[0].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
+					newItem.children[3].children[0].style.display="block";
+					newItem.children[3].children[1].style.display="none";
+					newItem.children[3].children[2].style.display="none";
+				}
+				else if((type.split("/")[0])==="video"){
+					console.log("video");
+					newItem.children[3].children[1].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+					newItem.children[3].children[1].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
+					newItem.children[3].children[1].style.display="block";
+					newItem.children[3].children[0].style.display="none";
+					newItem.children[3].children[2].style.display="none";
+				}
+				else{
+					console.log("image");
+					newItem.children[3].children[2].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+					newItem.children[3].children[2].style.display="block";
+					newItem.children[3].children[0].style.display="none";
+					newItem.children[3].children[1].style.display="none";
+				}
+			}
 			
 
 		}
