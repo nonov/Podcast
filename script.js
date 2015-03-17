@@ -25,6 +25,7 @@ window.addEventListener("load", function() {
 });
 
 function afficher(podcast) {
+<<<<<<< Updated upstream
 	var contenu = document.getElementById("Channelcontent");
 	var tabChannel = podcast.getElementsByTagName("channel"); //Tableau des channel même si il n'y en à qu'une en général
 	console.log("Nombre de channel: " + tabChannel.length);
@@ -69,6 +70,16 @@ function afficher(podcast) {
 
 		}
 	}
+=======
+	var div = document.getElementById("content");
+	var title = podcast.getElementsByTagName("title")[0].textContent;
+	var link = podcast.getElementsByTagName("link")[0].textContent;
+	var description = podcast.getElementsByTagName("description")[0].textContent;
+
+	var crtTitle = document.createElement("h1");
+	crtTitle = crtTitle.appendChild("title");
+	div.textContent = crtTitle;
+>>>>>>> Stashed changes
 }
 
 function handleError(req) {
