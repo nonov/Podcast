@@ -38,8 +38,7 @@ function afficher(podcast) {
    		var itemNode = document.getElementById("item");
    		var itemNodeVide = itemNode.cloneNode(true);
 
-   		//Gestion du lecteur en bas à droite de la page
-   		var lecteur = document.getElementsByClassName("fixed")[0];
+   		
 
    		titreNode.textContent = podcast.getElementsByTagName("title")[0].textContent;
    		linkNode.textContent = podcast.getElementsByTagName("link")[0].textContent;
@@ -58,83 +57,97 @@ function afficher(podcast) {
 		console.log("Nombre d'item: " + podcast.getElementsByTagName("item").length);
 		var tabItem = podcast.getElementsByTagName("item");
 		var listeItem = document.getElementById("listeItem");
+		console.log(tabItem.length);
 		for (var i=0; i<tabItem.length; i++){  //Pour chaque item
 			//Nouvel item
+			console.log("ligne 64");
 			var newItem = itemNodeVide.cloneNode(true);
 			newItem.style.display="inline";
 			listeItem.appendChild(newItem);
+			console.log(tabItem[i]);
 			//Recuperer title, link, description et enclosure et les insérer dans newItem
 			newItem.children[0].textContent=tabItem[i].getElementsByTagName("title")[0].textContent;
 			newItem.children[1].textContent=tabItem[i].getElementsByTagName("link")[0].textContent;
 			newItem.children[2].innerHTML=tabItem[i].getElementsByTagName("description")[0].textContent;
-			
 			var button = newItem.children[4];
-			button.addEventListener("click",function(){	
-				if (tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("type") !== null){
-					var type = tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("type");
-					//Test si audio ou video
-					if ((type.split("/")[0])==="audio"){
-						console.log("audio");
-
-						
-						//Lecteur
-						lecteur.children[0].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
-						lecteur.children[0].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
-						lecteur.children[0].style.display="block";
-						lecteur.children[1].style.display="none";
-						lecteur.children[2].style.display="none";
-
-
-						/*newItem.children[3].children[0].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
-						newItem.children[3].children[0].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
-						newItem.children[3].children[0].style.display="block";
-						newItem.children[3].children[1].style.display="none";
-						newItem.children[3].children[2].style.display="none";*/
-					}
-					else if((type.split("/")[0])==="video"){
-						console.log("video");
-						
-						//Lecteur
-						lecteur.children[1].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
-						lecteur.children[1].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
-						lecteur.children[1].style.display="block";
-						lecteur.children[0].style.display="none";
-						lecteur.children[2].style.display="none";
-
-						/*newItem.children[3].children[1].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
-						newItem.children[3].children[1].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
-						newItem.children[3].children[1].style.display="block";
-						newItem.children[3].children[0].style.display="none";
-						newItem.children[3].children[2].style.display="none";*/
-					}
-					else{
-						console.log("image");
-						
-						//Lecteur
-						lecteur.children[2].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
-						lecteur.children[2].style.display="block";
-						lecteur.children[0].style.display="none";
-						lecteur.children[1].style.display="none";
-
-						/*newItem.children[3].children[2].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
-						newItem.children[3].children[2].style.display="block";
-						newItem.children[3].children[0].style.display="none";
-						newItem.children[3].children[1].style.display="none";*/
-					}
-				}
-		});
-			
-
+			button.style.display="inline";
+			button.addEventListener("click", createClickEvt(newItem,i));
 		}
+
+		//Resolution du probleme de closure à l'intérieur d'une boucle
+		function createClickEvt(monItem, indice){
+			return function(){clickButton(monItem,indice);}
+		}
+
+		function clickButton(monItem, i){
+					//Gestion du lecteur en bas à droite de la page
+   					var lecteur = document.getElementsByClassName("fixed")[0];
+					console.log("Clique ! ");
+					console.log("indice = "+i);
+					console.log("Valeure de tabItem:" + tabItem[i]);
+					var type = tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("type");
+					if (tabItem[i]===undefined){console.log("indefini");}
+						if (type !== null){
+							//Test si audio ou video
+							if ((type.split("/")[0])==="audio"){
+								console.log("audio");
+
+								
+								//Lecteur
+								lecteur.children[0].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+								lecteur.children[0].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
+								lecteur.children[0].style.display="block";
+								lecteur.children[1].style.display="none";
+								lecteur.children[2].style.display="none";
+
+
+								// monItem.children[3].children[0].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+								// monItem.children[3].children[0].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
+								// monItem.children[3].children[0].style.display="block";
+								// monItem.children[3].children[1].style.display="none";
+								// monItem.children[3].children[2].style.display="none";
+							}
+							else if((type.split("/")[0])==="video"){
+								console.log("video");
+								
+								//Lecteur
+								lecteur.children[1].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+								lecteur.children[1].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
+								lecteur.children[1].style.display="block";
+								lecteur.children[0].style.display="none";
+								lecteur.children[2].style.display="none";
+
+								// monItemItem.children[3].children[1].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+								// monItem.children[3].children[1].textContent=tabItem[i].getElementsByTagName("enclosure")[0].textContent;
+								// monItem.children[3].children[1].style.display="block";
+								// monItem.children[3].children[0].style.display="none";
+								// monItem.children[3].children[2].style.display="none";
+							}
+							else{
+								console.log("image");
+								
+								//Lecteur
+								lecteur.children[2].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+								lecteur.children[2].style.display="block";
+								lecteur.children[0].style.display="none";
+								lecteur.children[1].style.display="none";
+
+								// monItem.children[3].children[2].src=tabItem[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+								// monItem.children[3].children[2].style.display="block";
+								// monItem.children[3].children[0].style.display="none";
+								// monItem.children[3].children[1].style.display="none";
+							}
+						}
+			}
 	}
 	var div = document.getElementById("content");
 	var title = podcast.getElementsByTagName("title")[0].textContent;
 	var link = podcast.getElementsByTagName("link")[0].textContent;
 	var description = podcast.getElementsByTagName("description")[0].textContent;
 
-	var crtTitle = document.createElement("h1");
+	/*var crtTitle = document.createElement("h1");
 	crtTitle = crtTitle.appendChild("title");
-	div.textContent = crtTitle;
+	div.textContent = crtTitle;*/
 }
 
 function handleError(req) {
