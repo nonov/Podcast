@@ -70,7 +70,7 @@ function afficher(podcast) {
 			newItem.children[0].textContent = tabItem[i].getElementsByTagName("title")[0].textContent;
 			newItem.children[2].children[0].textContent = tabItem[i].getElementsByTagName("link")[0].textContent;
 			newItem.children[2].children[0].setAttribute('href', tabItem[i].getElementsByTagName("link")[0].textContent);
-			newItem.children[1].innerHTML = tabItem[i].getElementsByTagName("description")[0].textContent;
+			//newItem.children[1].innerHTML = tabItem[i].getElementsByTagName("description")[0].textContent;
 			var button = newItem.children[3];
 			button.style.display = "inline";
 			button.addEventListener("click", createClickEvt(newItem,i));
