@@ -1,7 +1,7 @@
-// Lecteur essetiellement testé avec les flux suivants:
+// Lecteur essentiellement testé avec les flux suivants:
 // Audio : http://radiofrance-podcast.net/podcast09/rss_11591.xml
 // Video : http://rss.cnn.com/services/podcasting/studentnews/rss.xml
-// Image : http://www.france24.com/fr/actualites/rss/
+// Image : )
 
 window.addEventListener("load", function() {
 	var btn = document.getElementsByName("submit")[0];
@@ -37,7 +37,7 @@ function afficher(podcast) {
 	panels.style.display = "inline";
 	
 	var contenu = document.getElementById("Channelcontent");
-	var tabChannel = podcast.getElementsByTagName("channel"); //Tableau des channel même si il n'y en à qu'une en général
+	var tabChannel = podcast.getElementsByTagName("channel"); //Tableau des channels même si il n'y en à qu'une en général
 	
 	//Pour chaque chaine
 	for (var j = 0; j < tabChannel.length; j++) {
@@ -71,7 +71,7 @@ function afficher(podcast) {
 			newItem.style.display = "inline";
 			listeItem.appendChild(newItem);
 
-			//Recuperer title, link, description et enclosure et les insérer dans newItem
+			//Recupérer title, link, description et enclosure et les insérer dans newItem
 			newItem.children[0].textContent = tabItem[i].getElementsByTagName("title")[0].textContent;
 			newItem.children[2].children[0].textContent = tabItem[i].getElementsByTagName("link")[0].textContent;
 			newItem.children[2].children[0].setAttribute('href', tabItem[i].getElementsByTagName("link")[0].textContent);
