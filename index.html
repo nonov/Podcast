@@ -10,48 +10,77 @@
 <body>
 
 	<div class="large-12 columns text-center">
+		
 		<h1 class="subheader text-center"> Lecteur de Podcasts </h1>
 		<div class="row collapse">
-			<div class="small-10 medium-10 large-10 columns">
+			
+			<div class="large-9 columns">
 				<input type="url" id="source" placeholder="Url du podcast">
-			</div><!-- class small-10 medium-10 large-10 columns -->
-			<div class="small-2 columns">
+			</div><!-- class large-10 columns -->
+			
+			<div class="large-2 columns">
 				<a class="button postfix radius" name="submit"> Charger </a>
-			</div><!-- class small-2 columns -->
+			</div><!-- class large-2 columns -->
+			
+			<div class="large-1 columns">
+				<a data-reveal-id="myModal" name="help"> Aide ? </a>
+			</div><!-- class large-1 columns -->
+
 		</div><!-- class row collapse postfix-radius -->
+
 	</div><!-- class large-12 columns text-center -->
 
-	<div class="large-12 columns text-center" id="flux">
+	<div class="row text-center" id="flux">
+		
 		<div class="large-12 columns panel text-center" id="Channelcontent">
 			<h3 class="subheader text-center" id="Titre"></h3>
-			<img src="" alt="" style="width:200px;height:200px;">
+			<img src="" alt="">
 			<p class="text-center"><a id="Lien"></a></p>
 			<p class="text-center" id="Description"></p>
-		</div>
-		<div id="listeItem">
-			<div id="item">
-				<h3 class="subheader text-left" id="title"></h3>
-				<div id="description"></div>
-				<p class="text-center"><a id="link"></a></p>
-				<div id="enclosure">
-					<audio controls style="display:none;" width="400" height="200"src=""></audio>
-					<video controls style="display:none;" width="400" height="200" src=""></video>
-					<img src="" width="400" height="200" style="display:none">
-				</div>
-				<button name="b" style="display:none;">Enclosure</button>
-			</div>
-		</div>
+		</div><!-- class large-12 columns panel text-center -->
+
 		<div class="fixed">
 			<audio controls style="display:none; position:fixed; bottom:0; margin:auto;" src=""></audio>
 			<video controls style="display:none;" width="400" height="200" src=""></video>
 			<img class="lecteur" src="" width="400" height="200" style="display:none;">
-		</div>
+		</div><!-- class fixed -->
+		
+		<div id="listeItem" data-equalizer>
+			<div id="item" class="large-12 columns panel" style="display:none;" data-equalizer-watch>
+				<h3 class="subheader text-left" id="title"></h3>
+				<p id="description"></p>
+				<p class="text-center"><a id="link"></a></p>
+				<a class="button radius" style="display:none;"> Enclosure </a>
+			</div><!-- class row -->
+		</div><!-- end listeItem -->
+		<div id="enclosure">
+			<audio controls style="display:none;" width="400" height="200"></audio>
+			<video controls style="display:none;" width="400" height="200"></video>
+			<img width="400" height="200" style="display:none">
+		</div><!-- end enclosure -->
+		
+	</div><!-- class large-12 columns text-center -->
+
+	<div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+		<h2 class="subheader text-center" id="modalTitle"> Besoin d'aide ? </h2>
+		<p class="text-left">Saisir l'URL du flux RSS que vous voulez suivre</p>
+		<img src="img/img1.png" name="img" class="small-9" />
+		<p class="text-left">Pour lire les médias, il faut cliquer sur le bouton "Enclosure" :</p>
+		<img src="img/img2.png" name="img" class="small-9"/>
+		<p class="text-left">Voici les différents types de médias que vous allez avoir :</p>
+		<img src="img/img3.png" name="img" class="small-4" />
+		<img src="img/img4.png" name="img" class="small-4" />
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 	</div>
 
-
 	<script type="text/javascript" src="vendor/jquery.js"></script>
-	<script src="script.js"></script>
 	<script type="text/javascript" src="Foundation/foundation.js"></script>
+	<script type="text/javascript" src="Foundation/foundation.equalizer.js"></script>
+	<script type="text/javascript" src="Foundation/foundation.reveal.js"></script>
+	<script src="script.js"></script>
 
 </body>
-</html>
+</html><script type="text/javascript">
+$(document).foundation();
+$(document).foundation('equalizer', 'reflow');
+</script>
