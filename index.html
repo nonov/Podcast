@@ -1,25 +1,38 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css" type="text/css" />
-  <title> Podcast </title>
+	<meta Content-Type="text/html" charset="utf-8">
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="Foundation/foundation.min.css">
+	<link rel="stylesheet" type="text/css" href="Foundation/normalize.css">
+	<title> Podcast </title>
 </head>
 <body>
-	
-	
-	<div id="flux">
-		<div id="Channelcontent">
-			<div id="Titre"></div>
-			<div id="Lien"></div>
-			<div id="Description"></div>
-			<img src="" alt="">
+
+	<div class="large-12 columns text-center">
+		<h1 class="subheader text-center"> Lecteur de Podcasts </h1>
+		<div class="row collapse">
+			<div class="small-10 medium-10 large-10 columns">
+				<input type="url" id="source" placeholder="Url du podcast">
+			</div><!-- class small-10 medium-10 large-10 columns -->
+			<div class="small-2 columns">
+				<a class="button postfix radius" name="submit"> Charger </a>
+			</div><!-- class small-2 columns -->
+		</div><!-- class row collapse postfix-radius -->
+	</div><!-- class large-12 columns text-center -->
+
+	<div class="large-12 columns text-center" id="flux">
+		<div class="large-12 columns panel text-center" id="Channelcontent">
+			<h3 class="subheader text-center" id="Titre"></h3>
+			<img src="" alt="" style="width:200px;height:200px;">
+			<p class="text-center"><a id="Lien"></a></p>
+			<p class="text-center" id="Description"></p>
 		</div>
 		<div id="listeItem">
 			<div id="item">
-				<div id="title"></div>
-				<div id="link"></div>
+				<h3 class="subheader text-left" id="title"></h3>
 				<div id="description"></div>
+				<p class="text-center"><a id="link"></a></p>
 				<div id="enclosure">
 					<audio controls style="display:none;" width="400" height="200"src=""></audio>
 					<video controls style="display:none;" width="400" height="200" src=""></video>
@@ -28,8 +41,6 @@
 				<button name="b" style="display:none;">Enclosure</button>
 			</div>
 		</div>
-		<div class="fixedright"><input type="url" id="source" placeholder="Url du podcast" value="">
-	<button name="submit"> Charger </button></div>
 		<div class="fixed">
 			<audio controls style="display:none; position:fixed; bottom:0; margin:auto;" src=""></audio>
 			<video controls style="display:none;" width="400" height="200" src=""></video>
@@ -38,6 +49,9 @@
 	</div>
 
 
+	<script type="text/javascript" src="vendor/jquery.js"></script>
 	<script src="script.js"></script>
+	<script type="text/javascript" src="Foundation/foundation.js"></script>
+
 </body>
 </html>

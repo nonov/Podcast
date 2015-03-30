@@ -1,21 +1,3 @@
-.fixed {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  height: 30%;
-  width: 30%;
-  background-color: #7f8c8d;
-}
-
-.fixedright{
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 70%;
-  width: 30%;
-  background-color: #7f8c8d;
-}
-
-#flux{
-	width: 70%;
+.panel {
+	display: none;
 }
