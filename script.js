@@ -1,3 +1,8 @@
+// Lecteur essetiellement testé avec les flux suivants:
+// Audio : http://radiofrance-podcast.net/podcast09/rss_11591.xml
+// Video : http://rss.cnn.com/services/podcasting/studentnews/rss.xml
+// Image : http://www.france24.com/fr/actualites/rss/
+
 window.addEventListener("load", function() {
 	var btn = document.getElementsByName("submit")[0];
 	btn.addEventListener("click", function() {
